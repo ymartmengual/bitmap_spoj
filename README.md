@@ -30,8 +30,8 @@ Sample input:
 0011
 0110
 
+
 Sample output:
 3 2 1 0
 2 1 0 0
 1 0 0 1
-
