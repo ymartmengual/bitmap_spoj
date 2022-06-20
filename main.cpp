@@ -1,78 +1,26 @@
 #include <iostream>
 #include <stdlib.h>
-#include <algorithm>
-#include <cctype>
+#include <string>
 
 using namespace std;
 
-bool EsCeroUno( char cadena[182], int m)
-{
-    for( int x = 0; x < m; x++ )
-    {
-        if( cadena[x] < '0' || cadena[x] > '1' )
-            return false;
-    }
-
-    return true;
-}
-
-bool EsUnNumero(const string& cadena)
-{
-    for(char c : cadena )
-    {
-        if( !std::isdigit(c) )
-            return false;
-    }
-    return true;
-}
-
-bool CreateBitmapSize(int &n, int &m){
-
-    std::string mm,nn;
-    std::getline(std::cin, mm);
-
-    if(std::count(mm.begin(), mm.end(), ' ') != 1)
-        return false;
-
-    nn = mm.substr(0, mm.find(' '));
-    mm.erase(0, mm.find(' ') + 1);
-
-    if(!EsUnNumero(nn) && !EsUnNumero(mm))
-        return false;
-
-    n = stoi(nn);
-    m = stoi(mm);
-
-    return true;
-}
 
 int main()
 {
-    int t,i,j,c;
-    int n = 0;
-    int m = 0;
-    char input[182][182];
+    int t,i,j,c,n,m;
 
-    if(scanf("%d", &t) != 1)
-        return 0;
+    scanf("%d", &t);
+    string outp = "";
 
-    while(t--)
+    while (t--)
     {
-        printf("\n");
-        CreateBitmapSize(n, m);
+        char inp[183][183];
 
-        while (!(1 <= n && n <= 182 && 1 <= m && m <= 182)) {
-            if(CreateBitmapSize(n, m))
-                break;
-        }
+        scanf("%d %d\n",&n,&m);
 
         for(i = 0; i < n ; i++)
         {
-            scanf("%s",input[i]);
-
-            while(!EsCeroUno(input[i], m)){
-                scanf("%s",input[i]);
-            }
+            scanf("%s",inp[i]);
         }
 
         for(i = 0; i < n; i++)
@@ -81,11 +29,11 @@ int main()
             {
                 if(j != 0)
                 {
-                    printf(" ");
+                    outp.append( " ");
                 }
-                if(input[i][j] == '1')
+                if(inp[i][j] == '1')
                 {
-                    printf("0");
+                    outp.append( "0");
                 }
                 else
                 {
@@ -93,7 +41,7 @@ int main()
                     bool f = false;
                     for(c = 0; c <= n; c++)
                     {
-                        if(input[i][c] == '1')
+                        if(inp[i][c] == '1')
                         {
                             int res = abs(j-c);
                             if(!f){
@@ -103,13 +51,15 @@ int main()
                                 buff = res;
                             }
                         }
-                        if(c == n)
-                            printf("%d",buff);
+                        if(c == n){
+                            outp.append(std::to_string(buff));
+                        }
                     }
                 }
             }
-            printf("\n");
+            outp.append("\n");
         }
     }
+    cout << outp << endl;
     return 0;
 }
