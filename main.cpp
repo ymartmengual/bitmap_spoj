@@ -31,16 +31,18 @@ bool CreateBitmapSize(int &n, int &m){
     std::getline(std::cin, mm);
     size_t pos = 0;
     char ch = ' ';
+
     if(std::count(mm.begin(), mm.end(), ch) != 1)
         return false;
+
     pos = mm.find(ch);
     nn = mm.substr(0, pos);
-    if(!EsUnNumero(nn))
-        return false;
-    n = stoi(nn);
     mm.erase(0, pos + sizeof(ch));
-    if(!EsUnNumero(mm))
+
+    if(!EsUnNumero(nn) && !EsUnNumero(mm))
         return false;
+
+    n = stoi(nn);
     m = stoi(mm);
 
     return true;
