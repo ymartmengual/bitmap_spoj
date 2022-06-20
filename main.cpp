@@ -27,17 +27,15 @@ bool EsUnNumero(const string& cadena)
 }
 
 bool CreateBitmapSize(int &n, int &m){
+
     std::string mm,nn;
     std::getline(std::cin, mm);
-    size_t pos = 0;
-    char ch = ' ';
 
-    if(std::count(mm.begin(), mm.end(), ch) != 1)
+    if(std::count(mm.begin(), mm.end(), ' ') != 1)
         return false;
 
-    pos = mm.find(ch);
-    nn = mm.substr(0, pos);
-    mm.erase(0, pos + sizeof(ch));
+    nn = mm.substr(0, mm.find(' '));
+    mm.erase(0, mm.find(' ') + 1);
 
     if(!EsUnNumero(nn) && !EsUnNumero(mm))
         return false;
